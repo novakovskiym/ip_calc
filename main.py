@@ -1,6 +1,6 @@
 # Simple IP calculator
 # by Maksym Novakovskyi
-# version 0.1
+# version 0.2
 
 #Add '.' to binary
 def ip_format_bin(unf_str: str):
@@ -22,8 +22,32 @@ def ip_bin_to_dec(unc_str: str):
     return output_str
 
 
+def get_full_ip():
+    full_ip = input('Please enter an IP Address: ')
+    try:
+        parts1 = full_ip.split('/')
+        if len(parts1) == 2:
+            ip_part = parts1[0]
+            parts2 = ip_part.split('.')
+            if len(parts2) == 4 and \
+                all(0 <= int(part) <= 255 for part in parts2):
+                return full_ip
+            else:
+                print('Invalid IP Address!!!')
+                exit()
+        else:
+            print('No mask provided!!!')
+            exit()
+    except ValueError:
+        return False
+    except (AttributeError, TypeError):
+        return False
+
 #Get initial data (WIP)
-ip: str = '10.16.64.27/24'
+
+ip: str = get_full_ip()
+if not ip:
+    exit()
 split_str = ip.split('/')
 ip_str = split_str[0]
 mask_str = split_str[1]
