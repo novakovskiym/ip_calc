@@ -23,7 +23,9 @@ def ip_bin_to_dec(unc_str: str):
 
 
 def get_full_ip():
-    full_ip = input('Please enter an IP Address: ')
+    full_ip = input('Please enter an IP Address (192.168.0.1/24): ')
+    if full_ip == '':
+        full_ip = '192.168.0.1/24'
     try:
         parts1 = full_ip.split('/')
         if len(parts1) == 2:
@@ -98,6 +100,7 @@ last_addr = last_addr[:-1] + '0'
 #Total Hosts
 max_hosts = int(last_addr, 2) - int(first_addr, 2) + 1
 
+print('')
 print(f'IP Addr:\t\t{ip_bin_to_dec(bin_ip)}\t({ip_format_bin(bin_ip)})')
 print(f'IP Mask:\t\t{ip_bin_to_dec(bin_mask)}\t({ip_format_bin(bin_mask)})')
 print(f'Net Addr:\t\t{ip_bin_to_dec(net_addr)}\t({ip_format_bin(net_addr)})')
